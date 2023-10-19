@@ -47,7 +47,8 @@ const prices = [34, 5, 2];
 const shippingCost = 50;
 let utenti = [];
 utenti.push(marco, paul, amy);
-let utenteCheEffettuaLAcquisto = paul; //cambia il valore qui per provare se il tuo algoritmo funziona!
+
+let utenteCheEffettuaLAcquisto = marco; //cambia il valore qui per provare se il tuo algoritmo funziona!
 let sconto = 0;
 let prezzoFinale = 0;
 
@@ -61,11 +62,13 @@ for (let i = 0; i < utenti.length; i++) {
   }
 }
 
-//console.log(utenteCheEffettuaLAcquisto);
+console.log("====================INIZIO SCRIPT=========================");
 
 for (let i = 0; i < utenti.length; i++) {
   if (utenti[i] === utenteCheEffettuaLAcquisto) {
+    //verifico che sia l'utente scelto a inizio
     if (utenti[i].isAmbassador) {
+      //verifico se ambassador ed avviso
       console.log(
         "Caro utente " +
           utenti[i].name +
@@ -73,8 +76,9 @@ for (let i = 0; i < utenti.length; i++) {
           utenti[i].lastName +
           " sei un nostro ambassador, hai quindi diritto ad uno sconto del 30% su tutti gli articoli presenti nel tuo carrello!"
       );
-      sconto = (utenti[i].sommaTotaleArticoli / 100) * 30;
-      utenti[i].sommaTotaleArticoli -= sconto;
+      console.log(":::::");
+      sconto = (utenti[i].sommaTotaleArticoli / 100) * 30; //setto già lo sconto
+      utenti[i].sommaTotaleArticoli -= sconto; //e gli applico lo sconto sulla somma totale
     } else {
       console.log(
         "Caro utente " +
@@ -83,13 +87,15 @@ for (let i = 0; i < utenti.length; i++) {
           utenti[i].lastName +
           " non sei un nostro ambassador, quindi devi sostenere il prezzo intero degli articoli..."
       );
+      console.log(":::::");
     }
+    //verifico che sommaTotale sia  minore di 100 x applicare spesa spedizione e che non sia pari a 0 la somma totale per gestire il carrello vuoto più in basso
     if (
       utenti[i].sommaTotaleArticoli < 100 &&
       utenti[i].sommaTotaleArticoli !== 0
     ) {
       prezzoFinale = utenti[i].sommaTotaleArticoli + shippingCost;
-      //console.log(utenti[i]);
+      //con questa console espongo i dati spesa totale
       console.log(
         "La tua spesa totale comprese le spese di spedizone è pari a " +
           prezzoFinale +
@@ -99,14 +105,16 @@ for (let i = 0; i < utenti.length; i++) {
             utenti[i].sommaTotaleArticoli +
             "€ degli articoli). ")
       );
+      //qui espongo i prezzi degli articoli sfruttando il join  x aggiungere i caratteri '€' e ','
       console.log(
         "Di seguito i prezzi dei tuoi articoli selezionati 1 per 1: " +
           utenti[i].prezziArticoliNelCarrello.join("€, ") +
           "€."
       );
+      console.log("====================FINE SCRIPT=========================");
     } else if (utenti[i].sommaTotaleArticoli >= 100) {
-      prezzoFinale = utenti[i].sommaTotaleArticoli;
-      //console.log(utenti[i]);
+      prezzoFinale = utenti[i].sommaTotaleArticoli; //se sommaTotale supera cento, toglo le spedizioni
+
       console.log(
         "La tua spesa totale di " +
           prezzoFinale +
@@ -117,8 +125,10 @@ for (let i = 0; i < utenti.length; i++) {
           utenti[i].prezziArticoliNelCarrello.join("€, ") +
           "€."
       );
+      console.log("====================FINE SCRIPT=========================");
     } else if (utenti[i].sommaTotaleArticoli === 0) {
       console.log("Carrello vuoto, non devi pagare nulla");
+      console.log("====================FINE SCRIPT=========================");
     }
   }
 }
