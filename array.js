@@ -1,3 +1,17 @@
-let alfabeto = ["a", "b", "c", "d", "e", "f", "g"];
+let array = ["cata", "marcela", "cristi", "ion", "gabi", "adi"];
 
-console.log(alfabeto[2]);
+let modifica = array.concat("Maria", "Gina si Petrica");
+
+// console.log(modifica);
+
+// for (let i = 0; i < modifica.length; i++) {
+//   console.log(modifica[i]);
+// }
+
+// let indiceDi = modifica.indexOf("Maria");
+
+// console.log(indiceDi);
+
+let slice = array.splice(1, 4);
+console.log(slice);
+console.log(array);
