@@ -16,6 +16,15 @@ ES. L'utente Marco Rossi e' un ambassador, quindi la frase dovrebbe essere "Marc
 Infine, crea un SECONDO array in cui inserirai SOLO gli ambassador.
 */
 
+const catalin = {
+  name: "Catalin",
+  lastName: "Radoi",
+  isAmbassador: true,
+  nrOggettiNelCarrello: 0,
+  prezziArticoliNelCarrello: [0],
+  sommaTotaleArticoli: 0,
+};
+
 const marco = {
   name: "Marco",
   lastName: "Rossi",
@@ -45,12 +54,17 @@ const amy = {
 
 const prices = [34, 5, 2];
 const shippingCost = 50;
-let utenti = [];
-utenti.push(marco, paul, amy);
 
-let utenteCheEffettuaLAcquisto = marco; //cambia il valore qui per provare se il tuo algoritmo funziona!
+let utenti = [];
+let ambassaddor = [];
+utenti.push(marco, paul, amy, catalin);
+
+//let utenteCheEffettuaLAcquisto = Math.floor(Math.random() * utenti.length); //cambia il valore qui per provare se il tuo algoritmo funziona in modo randomico!
+let utenteCheEffettuaLAcquisto = catalin;
 let sconto = 0;
 let prezzoFinale = 0;
+
+console.log("====================INIZIO SCRIPT=========================\n");
 
 for (let i = 0; i < utenti.length; i++) {
   utenti[i].nrOggettiNelCarrello = Math.round(Math.random() * 10); // mi genero in modo casuale il numero di oggetti nel carrello x ogni utente
@@ -61,8 +75,6 @@ for (let i = 0; i < utenti.length; i++) {
     utenti[i].sommaTotaleArticoli += utenti[i].prezziArticoliNelCarrello[j]; // quii invece mi sommo i valori totali dei prezzi in modo tale da confrontare al checkout del carrello
   }
 }
-
-console.log("====================INIZIO SCRIPT=========================");
 
 for (let i = 0; i < utenti.length; i++) {
   if (utenti[i] === utenteCheEffettuaLAcquisto) {
@@ -76,6 +88,7 @@ for (let i = 0; i < utenti.length; i++) {
           utenti[i].lastName +
           " sei un nostro ambassador, hai quindi diritto ad uno sconto del 30% su tutti gli articoli presenti nel tuo carrello!"
       );
+
       console.log(":::::");
       sconto = (utenti[i].sommaTotaleArticoli / 100) * 30; //setto già lo sconto
       utenti[i].sommaTotaleArticoli -= sconto; //e gli applico lo sconto sulla somma totale
@@ -85,9 +98,9 @@ for (let i = 0; i < utenti.length; i++) {
           utenti[i].name +
           " " +
           utenti[i].lastName +
-          " non sei un nostro ambassador, quindi devi sostenere il prezzo intero degli articoli..."
+          " non sei un nostro ambassador, quindi devi sostenere il prezzo intero degli articoli... \n\n"
       );
-      console.log(":::::");
+      console.log("::::: \n\n");
     }
     //verifico che sommaTotale sia  minore di 100 x applicare spesa spedizione e che non sia pari a 0 la somma totale per gestire il carrello vuoto più in basso
     if (
@@ -111,7 +124,9 @@ for (let i = 0; i < utenti.length; i++) {
           utenti[i].prezziArticoliNelCarrello.join("€, ") +
           "€."
       );
-      console.log("====================FINE SCRIPT=========================");
+      console.log(
+        "====================FINE SCRIPT=========================\n\n"
+      );
     } else if (utenti[i].sommaTotaleArticoli >= 100) {
       prezzoFinale = utenti[i].sommaTotaleArticoli; //se sommaTotale supera cento, toglo le spedizioni
 
@@ -123,12 +138,30 @@ for (let i = 0; i < utenti.length; i++) {
       console.log(
         "Di seguito i prezzi dei tuoi articoli selezionati 1 per 1: " +
           utenti[i].prezziArticoliNelCarrello.join("€, ") +
-          "€."
+          "€. \n\n"
       );
-      console.log("====================FINE SCRIPT=========================");
+      console.log(
+        "====================FINE SCRIPT=========================\n\n"
+      );
     } else if (utenti[i].sommaTotaleArticoli === 0) {
-      console.log("Carrello vuoto, non devi pagare nulla");
-      console.log("====================FINE SCRIPT=========================");
+      console.log("Carrello vuoto, non devi pagare nulla \n\n");
+      console.log(
+        "====================FINE SCRIPT=========================\n\n"
+      );
     }
   }
 }
+
+// //mi ciclo tutti gli utenti x beccare gli ambassador con il push
+// for (let i = 0; i < utenti.length; i++) {
+//   if (utenti[i].isAmbassador)
+//     ambassaddor.push(utenti[i].name + " " + utenti[i].lastName);
+// }
+
+//ciclo tutti gli utenti x beccare ambassador con il filter
+for (let i = 0; i < utenti.length; i++) {
+  ambassaddor = utenti.filter((ambassador) => ambassador.isAmbassador === true);
+}
+console.log("::::::::::::::::: EXTRA AMBASSADORS :::::::::::::::::");
+console.log("Ho trovato questi ambassador nella lista utenti inserita: \n\n");
+console.log(ambassaddor);
